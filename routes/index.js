@@ -48,8 +48,8 @@ router.get("/", async (req, res) => {
     }
 
     const templates = await Template.findAll({ where: filters });
-    if (!templates.length)
-      return res.status(404).send("No templates match the search criteria.");
+    // if (!templates.length)
+    //   return res.status(404).send("No templates match the search criteria.");
 
     res.render("index", { templates });
   } catch (error) {
