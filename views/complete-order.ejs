@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      TroyThemes | <%= typeof title !== 'undefined' ? title : 'Default Title' %>
+    </title>
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Favicon -->
+    <link href="/img/favicon.ico" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Icon Font Stylesheet -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link href="/lib/animate/animate.min.css" rel="stylesheet" />
+    <link
+      href="/lib/owlcarousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="container-xxl bg-white p-0">
+      <!-- Spinner Start -->
+      <div
+        id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+      >
+        <div
+          class="spinner-border text-primary"
+          style="width: 3rem; height: 3rem"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <!-- Spinner End -->
+
+      <!-- Navbar & Hero Start -->
+      <div class="container-xxl position-relative p-0">
+        <nav
+          class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0"
+        >
+          <a href="" class="navbar-brand p-0">
+            <h1 class="m-0"><i class="fa fa-server me-3"></i>TroyThemes</h1>
+            <!-- <img src="img/logo.png" alt="Logo"> -->
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarCollapse"
+          >
+            <span class="fa fa-bars"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+              <a href="/" class="nav-item nav-link active">Theme Home</a>
+              <!-- <a href="https://troyhost.troycityafrica.com/" class="nav-item nav-link active">Hosting Home</a> -->
+              <a
+                href="https://troyhost.troycityafrica.com/about"
+                class="nav-item nav-link"
+                >About</a
+              >
+              <!-- <a href="https://troyhost.troycityafrica.com/domain" class="nav-item nav-link">Domain</a> -->
+              <a
+                href="https://troyhost.troycityafrica.com/hosting"
+                class="nav-item nav-link"
+                >Hosting</a
+              >
+
+              <a href="contact" class="nav-item nav-link">Contact</a>
+            </div>
+            <button
+              type="button"
+              class="btn text-secondary ms-3"
+              data-bs-toggle="modal"
+              data-bs-target="#searchModal"
+            >
+              <i class="fa fa-search"></i>
+            </button>
+
+            <a
+              href="https://wa.me/254113094450"
+              target="_blank"
+              class="btn btn-success py-2 px-4 ms-3"
+            >
+              <i class="fa fa-whatsapp me-2"></i> WhatsApp
+            </a>
+          </div>
+        </nav>
+      </div>
+      <hr />
+      <div class="container-xxl py-5 bg-primary hero-header mb-5">
+        <br />
+        <br />
+        <br />
+      </div>
+      <div class="container-xxl py-5" id="purchase-form">
+        <div class="container px-lg-5">
+          <h1 class="mb-3">Order Details</h1>
+          <div class="row g-5">
+            <p>Contact and Billing Details</p>
+            <div class="col-lg-7 col-md-6">
+              <div class="wow fadeInUp" data-wow-delay="0.2s">
+                <!-- <form id="purchaseForm"> -->
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        placeholder="Your Name"
+                        value="<%= order.fullName %>"
+                        readonly
+                      />
+                      <label for="name">Your Name</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        placeholder="Your Email"
+                        readonly
+                        value="<%= order.email %>"
+                      />
+                      <label for="email">Your Email</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="phone"
+                        placeholder="Phone Number"
+                        value="<%= order.phone %>"
+                        readonly
+                      />
+                      <label for="phone">Phone Number</label>
+                    </div>
+                  </div>
+
+                  <!-- Hosting Plan Selection -->
+                  <!-- Payment Details -->
+                  <div class="col-12">
+                    <label class="form-label">Payment Method</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Choose Payment Method"
+                      value="M-Pesa"
+                      readonly
+                    />
+                    <!-- <label for="paymentMethod">Choose Payment Method</label> -->
+                  </div>
+                </div>
+                <!-- Submit Button -->
+              </div>
+              <!-- </form> -->
+            </div>
+            <div class="col-lg-5 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+              <div class="section-title position-relative mx-auto mb-4 pb-4">
+                <h3 class="fw-bold mb-0">Payment Option</h3>
+              </div>
+              <div class="border rounded p-4 mt-4">
+                <form id="paymentForm">
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="phone"
+                          placeholder="Mpesa Number eg 07xxxxxx"
+                          name="phone"
+                          value="<%= order.phone || '' %>"
+                          onfocus="this.select()"
+                        />
+                        <label for="phone">Mpesa Number</label>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="invoiceId"
+                          placeholder="Invoice ID"
+                          value="<%= order.invoiceId %>"
+                          readonly
+                        />
+                        <label for="invoiceId">Invoice Number</label>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="inv_amount"
+                          placeholder="Invoice Amount"
+                          value="<%= order.totalAmount %>"
+                          readonly
+                        />
+                        <label for="invoiceId">Amount</label>
+                      </div>
+                    </div>
+                    <button class="btn btn-primary w-100 py-3" type="submit">
+                      Pay
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div class="border rounded p-4 mt-4">
+                <button
+                  class="btn btn-primary w-100 py-3"
+                  onclick="downloadInvoice()"
+                >
+                  Download Invoice
+                </button>
+              </div>
+              <hr />
+            </div>
+            <div
+              class="col-lg-5 col-md-6 wow fadeInUp"
+              data-wow-delay="0.5s"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div
+      class="container-fluid bg-primary text-white footer mt-5 pt-5 wow fadeIn"
+      data-wow-delay="0.1s"
+    >
+      <div class="container py-5 px-lg-5">
+        <div class="row gy-5 gx-4 pt-5">
+          <div class="col-12">
+            <h5 class="fw-bold text-white mb-4">Subscribe Our Newsletter</h5>
+            <div class="position-relative" style="max-width: 400px">
+              <input
+                class="form-control bg-white border-0 w-100 py-3 ps-4 pe-5"
+                type="text"
+                placeholder="Enter your email"
+              />
+              <button
+                type="button"
+                class="btn btn-primary py-2 px-3 position-absolute top-0 end-0 mt-2 me-2"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-5 col-md-12">
+            <div class="row gy-5 g-4">
+              <div class="col-md-6">
+                <h5 class="fw-bold text-white mb-4">About Us</h5>
+                <a class="btn btn-link" href="/about">About Us</a>
+                <a class="btn btn-link" href="/contact">Contact Us</a>
+                <h5 class="fw-bold text-white mb-4">Our Services</h5>
+                <a class="btn btn-link" href="/domain">Domain Register</a>
+                <a class="btn btn-link" href="/hostining">Baby plan Hosting</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <h5 class="fw-bold text-white mb-4">Get In Touch</h5>
+            <p class="mb-2">
+              <i class="fa fa-map-marker-alt me-3"></i>Mt. View,Westlands,NRB
+            </p>
+            <p class="mb-2">
+              <i class="fa fa-phone-alt me-3"></i>+254113094450
+            </p>
+            <p class="mb-2">
+              <i class="fa fa-envelope me-3"></i>info@troycityafrica.com
+            </p>
+            <div class="d-flex pt-2">
+              <a class="btn btn-outline-light btn-social" href=""
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a class="btn btn-outline-light btn-social" href=""
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a class="btn btn-outline-light btn-social" href=""
+                ><i class="fab fa-youtube"></i
+              ></a>
+              <a class="btn btn-outline-light btn-social" href=""
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mt-lg-n5">
+            <div class="bg-light rounded" style="padding: 30px">
+              <input
+                type="text"
+                class="form-control border-0 py-2 mb-2"
+                placeholder="Name"
+              />
+              <input
+                type="email"
+                class="form-control border-0 py-2 mb-2"
+                placeholder="Email"
+              />
+              <textarea
+                class="form-control border-0 mb-2"
+                rows="2"
+                placeholder="Message"
+              ></textarea>
+              <button class="btn btn-primary w-100 py-2">Send Message</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container px-lg-5">
+        <div class="copyright">
+          <div class="row">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+              &copy; <a class="border-bottom" href="#">Troyhost</a>, All Right
+              Reserved.
+
+              <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+              Designed By
+              <a class="border-bottom" href="https://www.troycityafrica.com"
+                >Troycity Africa</a
+              >
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+              <div class="footer-menu">
+                <a href="/">Home</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- </div> -->
+      <!-- Footer End -->
+
+      <!-- Back to Top -->
+      <a href="#" class="btn btn-lg btn-secondary btn-lg-square back-to-top"
+        ><i class="bi bi-arrow-up"></i
+      ></a>
+    </div>
+    <!-- </div> -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/lib/wow/wow.min.js"></script>
+    <script src="/lib/easing/easing.min.js"></script>
+    <script src="/lib/waypoints/waypoints.min.js"></script>
+    <script src="/lib/counterup/counterup.min.js"></script>
+    <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("paymentForm");
+        const submitButton = form.querySelector("button[type='submit']");
+
+        form.addEventListener("submit", async function (event) {
+          event.preventDefault(); // Prevent default form submission
+
+          // Get form values
+          const phone = document.getElementById("phone").value;
+          const invoiceId = document.getElementById("invoiceId").value;
+          const amount = document.getElementById("inv_amount").value;
+
+          // Disable submit button and change text
+          submitButton.disabled = true;
+          submitButton.textContent = "Processing...";
+
+          try {
+            const response = await fetch("/payment", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ phone, invoiceId, amount }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              alert("Payment request sent successfully.");
+            } else {
+              alert("Payment request failed: " + result.message);
+            }
+          } catch (error) {
+            alert("An error occurred: " + error.message);
+          }
+
+          // Change button to Retry after 30 seconds
+          submitButton.textContent = "Retry";
+          setTimeout(() => {
+            submitButton.disabled = false;
+            submitButton.textContent = "Pay";
+          }, 30000);
+        });
+
+        // Create a second button to check payment status
+        const checkPaymentButton = document.createElement("button");
+        checkPaymentButton.textContent = "Check Payment";
+        checkPaymentButton.classList.add(
+          "btn",
+          "btn-secondary",
+          "w-100",
+          "mt-2"
+        );
+
+        // Append button **outside** the form to avoid form submission issues
+        form.parentElement.appendChild(checkPaymentButton);
+
+        checkPaymentButton.addEventListener("click", async function (event) {
+          event.preventDefault(); // Prevent default behavior
+
+          const invoiceId = document.getElementById("invoiceId").value;
+
+          try {
+            const response = await fetch(`/check-payment/${invoiceId}`);
+            const result = await response.json();
+            alert("Payment status: " + result.status);
+            if (result.status === "completed") {
+              alert("Payment successful. Receipt send to your email");
+              //send api request to send invoice as paid
+              window.location.href = `/payment-sucess/${invoiceId}`;
+            }
+          } catch (error) {
+            alert("Error checking payment status: " + error.message);
+          }
+        });
+      });
+    </script>
+    <script>
+      function downloadInvoice() {
+        // Replace '12345' with the actual invoice ID dynamically
+        const invoiceId = "<%= order.invoiceId %>";
+
+        // API endpoint to download invoice
+        const downloadUrl = `/download-invoice/${invoiceId}`;
+
+        // Create a hidden anchor element
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.setAttribute("download", `invoice_${invoiceId}.pdf`);
+
+        // Append to body and trigger click
+        document.body.appendChild(link);
+        link.click();
+
+        // Remove the anchor element after clicking
+        document.body.removeChild(link);
+      }
+    </script>
+
+    <!-- Template Javascript -->
+    <script src="/js/main.js"></script>
+  </body>
+</html>

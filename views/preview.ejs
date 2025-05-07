@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Preview Template</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        width: 100%;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .overlay button {
+        background: #28a745;
+        border: none;
+        padding: 10px 20px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+    </style>
+    <script>
+      // Disable right click
+      document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+      // Block some keys (like F12, Ctrl+U)
+      document.addEventListener("keydown", function (e) {
+        if (
+          e.key === "F12" ||
+          (e.ctrlKey && (e.key === "u" || e.key === "s" || e.key === "Shift"))
+        ) {
+          e.preventDefault();
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div class="overlay">
+      <div>Preview Mode</div>
+      <button
+        onclick="window.location.href='/cart?templateId=<%= template.id %>'"
+      >
+        Buy Template
+      </button>
+    </div>
+    <br />
+
+    <iframe
+      src="/preview/<%= template.id %>/<%= template.zipPath %>/index.html"
+    ></iframe>
+  </body>
+</html>

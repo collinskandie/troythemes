@@ -1,0 +1,82 @@
+<%- include('layout', { title: 'Upload theme', body: `
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h2 class="mb-4 text-center">Upload New Theme</h2>
+      <form
+        action="/templates/themes/upload"
+        method="POST"
+        enctype="multipart/form-data"
+        class="bg-light p-4 rounded shadow-sm"
+      >
+        <div class="mb-3">
+          <label for="name" class="form-label">Template Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label"
+            >Template Description</label
+          >
+          <textarea
+            class="form-control"
+            id="description"
+            name="description"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="category" class="form-label">Category / Tags</label>
+          <input
+            type="text"
+            class="form-control"
+            id="category"
+            name="category"
+            placeholder="e.g., business, portfolio"
+          />
+          <label for="cost" class="form-label">Template Cost</label>
+          <input
+            type="number"
+            class="form-control"
+            id="cost"
+            name="cost"
+            placeholder="e.g., 1000"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="thumbnail" class="form-label">Thumbnail Image</label>
+          <input
+            type="file"
+            class="form-control"
+            id="thumbnail"
+            name="thumbnail"
+            accept="image/*"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="file" class="form-label">Template File (ZIP)</label>
+          <input
+            type="file"
+            class="form-control"
+            id="file"
+            name="file"
+            accept=".zip,.rar"
+            required
+          />
+        </div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary">Upload Theme</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Hero End -->
+` }) %>

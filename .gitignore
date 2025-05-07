@@ -1,0 +1,7 @@
+public/themes/*
+uploads/themes/*
+uploads/thumbnails/*
+data/*
+data/invoices/*
+.env
+node_modules/*

@@ -1,0 +1,145 @@
+<%- include('layout', { title: 'Home', body: `
+<!-- Hero Start -->
+<div class="container-fluid bg-primary py-5 hero-header mb-5">
+  <div class="container mt-5">
+    <br />
+    <h1 class="display-4 text-white mb-4">Welcome to TroyThemes</h1>
+    <p class="lead text-white mb-4">
+      Your one-stop destination for high-quality website templates.
+    </p>
+    <br />
+  </div>
+</div>
+<div class="container-xxl domain mb-5" style="margin-top: 90px">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 text-center">
+        <h1 class="display-4 mb-4">Explore Our Templates</h1>
+        <p class="lead mb-4">
+          Discover a wide range of templates to suit your needs.
+        </p>
+      </div>
+    </div>
+    <div class="container px-lg-5">
+      <form method="GET" action="/" class="mb-4">
+        <div class="row g-2">
+          <div class="col-md-3">
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              placeholder="Search by name"
+            />
+          </div>
+          <div class="col-md-3">
+            <input
+              type="text"
+              name="category"
+              class="form-control"
+              placeholder="Search by category"
+            />
+          </div>
+          <div class="col-md-2">
+            <input
+              type="number"
+              name="minPrice"
+              class="form-control"
+              placeholder="Min price"
+            />
+          </div>
+          <div class="col-md-2">
+            <input
+              type="number"
+              name="maxPrice"
+              class="form-control"
+              placeholder="Max price"
+            />
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="row justify-content-center template-container">
+        <!-- templates will be injected here -->
+      </div>
+
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center pagination-controls">
+          <!-- pagination buttons will be injected here -->
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- Hero End -->
+  ` }) %>
+</div>
+<!-- Inject template data -->
+<script>
+  const templates = JSON.parse('<%- JSON.stringify(templates) %>');
+</script>
+
+<script>
+  const templatesPerPage = 16;
+  let currentPage = 1;
+
+  function paginateTemplates(page) {
+    const start = (page - 1) * templatesPerPage;
+    const end = start + templatesPerPage;
+    const paginated = templates.slice(start, end);
+
+    document.querySelector(".template-container").innerHTML = paginated
+      .map(
+        (template) => `
+    <div class="col-sm-6 col-md-3 mb-3">
+      <div class="card shadow-sm" style="height: 100%; font-size: 0.9rem">
+        <img
+          src="${template.image}"
+          class="card-img-top"
+          alt="${template.name}"
+          style="height: 150px; object-fit: cover"
+        />
+        <div class="card-body p-2">
+          <h6 class="card-title mb-1" style="font-size: 1rem">
+            ${template.name}
+          </h6>
+          <p class="card-text mb-2">
+            <small class="text-muted">${template.downloads} Downloads</small>
+          </p>
+          <h6>KSh ${template.cost}</h6>
+          <a href="/preview/${template.id}" class="btn btn-sm btn-primary">Live Preview</a>
+        </div>
+      </div>
+    </div>
+  `
+      )
+      .join("");
+
+    renderPaginationButtons();
+  }
+
+  function renderPaginationButtons() {
+    const totalPages = Math.ceil(templates.length / templatesPerPage);
+    const pagination = document.querySelector(".pagination-controls");
+    pagination.innerHTML = "";
+
+    for (let i = 1; i <= totalPages; i++) {
+      pagination.innerHTML += `
+        <li class="page-item ${i === currentPage ? "active" : ""}">
+          <a class="page-link" href="#">${i}</a>
+        </li>
+      `;
+    }
+
+    document.querySelectorAll(".page-link").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        currentPage = parseInt(e.target.textContent);
+        paginateTemplates(currentPage);
+      });
+    });
+  }
+
+  paginateTemplates(currentPage);
+</script>

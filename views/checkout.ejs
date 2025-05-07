@@ -1,0 +1,163 @@
+<%- include('layout', { title: 'Checkout', body: `
+<!-- Hero Start -->
+<div class="container-fluid bg-primary py-5 hero-header mb-5 text-white">
+  <div class="container mt-5">
+    <h1 class="display-4">Checkout</h1>
+    <p>Complete your purchase below</p>
+  </div>
+
+  <div class="container-xxl py-5">
+    <div class="row g-5">
+      <!-- Template & Hosting Summary -->
+      <div class="col-lg-6">
+        <div class="card shadow p-4 mb-4">
+          <h3 class="mb-3">Order Summary</h3>
+          <div id="templateDetails" class="mb-3"></div>
+          <div id="hostingDetails" class="mb-3"></div>
+          <h5 class="text-end">
+            Total:
+            <span id="totalPrice" class="text-primary fw-bold">KES 0</span>
+          </h5>
+        </div>
+      </div>
+      <!-- User Info & Payment -->
+      <div class="col-lg-6">
+        <div class="card shadow p-4">
+          <h3 class="mb-3">Billing Details</h3>
+          <form
+            action="/complete-purchase"
+            method="POST"
+            onsubmit="return setTotalPriceBeforeSubmit()"
+          >
+            <input type="hidden" name="templateId" id="templateIdInput" />
+            <input type="hidden" name="hostingId" id="hostingIdInput" />
+            <input type="hidden" name="totalPrice" id="totalPriceInput" />
+            <input type="hidden" name="selectedPlan" id="hostingIdInputJson" />
+
+            <div class="mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input
+                type="text"
+                name="fullName"
+                id="fullName"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input
+                type="tel"
+                name="phone"
+                id="phone"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="paymentMethod" class="form-label"
+                >Payment Method</label
+              >
+              <select
+                name="paymentMethod"
+                id="paymentMethod"
+                class="form-select"
+                required
+              >
+                <option value="mpesa">Mpesa</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2">
+              Complete Purchase
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  ` }) %>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const templateId = localStorage.getItem("selectedTemplate");
+      const templateName = localStorage.getItem("templateName");
+      const templatePrice = parseFloat(
+        localStorage.getItem("templatePrice") || 0
+      );
+      const hostingData = JSON.parse(
+        localStorage.getItem("selectedHostingPlan") || "{}"
+      );
+      const hostingName = hostingData.name || null;
+      const hostingPrice = parseFloat((hostingData.price || "0").replace(/,/g, ""));
+
+      console.log("Hosting price:", hostingPrice);
+      console.log("Template price:", templatePrice);
+
+      document.getElementById("templateIdInput").value = templateId;
+      document.getElementById("hostingIdInput").value = hostingData.id || "";
+
+
+      try {
+        const res = await fetch(`/api/template/${templateId}`);
+        <!-- console.log(res.body); -->
+
+        const template = await res.json();
+        console.log(template);
+        console.log(template.template);
+        const tDetails = template.template;
+        console.log(tDetails);
+
+        document.getElementById("templateDetails").innerHTML = `
+        <h5>Template: ${tDetails.name}</h5>
+        <img src="${tDetails.image}" class="img-fluid mb-2 rounded shadow-sm" style="height: 200px; width: auto;" />
+        <p>Description: ${tDetails.description}</p>
+        <p>Category: ${tDetails.category}</p>
+        <p><strong>Cost:</strong> KES ${tDetails.cost}</p>
+      `;
+
+        if (hostingName) {
+          document.getElementById("hostingDetails").innerHTML = `
+          <h5>Hosting: ${hostingName}</h5>
+          <p><strong>Cost:</strong> KES ${hostingPrice}</p>
+        `;
+        } else {
+          document.getElementById("hostingDetails").innerHTML = `
+          <h5>No hosting selected</h5>
+        `;
+        }
+
+
+        const total = templatePrice + hostingPrice;
+        document.getElementById("totalPrice").textContent =
+          "KES " + total.toFixed(2);
+      } catch (error) {
+        console.error("Failed to load template:", error);
+        alert("Failed to load template details.");
+      }
+    });
+
+    function setTotalPriceBeforeSubmit() {
+      const totalPriceElement = document.getElementById("totalPrice");
+      const totalPrice = totalPriceElement.textContent.replace("KES", "").trim();
+      const selectedPlan = localStorage.getItem("selectedHostingPlan");
+      console.log("Selected plan:", selectedPlan);
+      document.getElementById("hostingIdInputJson").value = selectedPlan;
+      document.getElementById("totalPriceInput").value = totalPrice;
+      return true; // allow form to submit
+    }
+  </script>
+</div>
