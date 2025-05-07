@@ -2,7 +2,6 @@
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
-
 require("dotenv").config();
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
@@ -10,13 +9,13 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var cartRouter = require("./routes/cart");
 const templateRoutes = require("./routes/templates");
+const expressLayouts = require("express-ejs-layouts");
 
 var cors = require("cors");
 var app = express();
 const { Sequelize } = require("sequelize");
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const { sequelize } = require("./models");
@@ -50,6 +49,8 @@ app.use(cors());
 // Set EJS as the view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(expressLayouts);
+app.set("layout", "layout"); // layout.ejs will be the layout
 // Serve static files
 app.use(express.static("public"));
 

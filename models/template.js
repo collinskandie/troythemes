@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     cost: {
       type: DataTypes.FLOAT,
       allowNull: true,
+      unique: false,
       defaultValue: 0.0,
     },
     image: {

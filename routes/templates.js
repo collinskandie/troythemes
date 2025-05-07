@@ -5,6 +5,7 @@ const unzipper = require("unzipper");
 const fs = require("fs");
 const path = require("path");
 const { Template } = require("../models");
+const { title } = require("process");
 
 const upload = multer({ dest: "temp_zips/" });
 
@@ -21,7 +22,7 @@ router.post(
   ]),
   async (req, res) => {
     try {
-      const { name, description, category } = req.body;
+      const { name, description, category, cost } = req.body;
       const thumbnail = req.files["thumbnail"]
         ? req.files["thumbnail"][0]
         : null;
@@ -74,6 +75,7 @@ router.post(
         name,
         description,
         category,
+        cost,
         image: dbThumbnailPath,
         previewPath: previewPath,
         zipPath: zipFolderName, // Save the path of the zip file
@@ -97,7 +99,10 @@ router.post(
 
         stream.on("close", () => {
           console.log("Extraction complete");
-          res.send("Theme uploaded and extracted successfully!");
+          res.render("upload-theme", {
+            title: "Upload Theme",
+            message: "Theme uploaded successfully!", // or null
+          });
         });
 
         stream.on("error", (err) => {
