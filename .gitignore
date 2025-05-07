@@ -5,3 +5,5 @@ data/*
 data/invoices/*
 .env
 node_modules/*
+temp_zips/*
+public/uploads/*
