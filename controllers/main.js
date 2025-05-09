@@ -11,7 +11,6 @@ const EMAIL_USER = "troyhost@troycityafrica.com";
 const EMAIL_PASS = "!9OFkB)KH(9S";
 const EMAIL_SECURE = true; // true for 465, false for other ports
 
-
 transporter = nodemailer.createTransport({
   host: EMAIL_HOST,
   port: EMAIL_PORT,
@@ -41,13 +40,11 @@ async function generateInvoice(invoiceData) {
       console.error("Failed to generate HTML content.");
       return;
     }
-
     // Define PDF path
     const pdfPath = path.join(
       __dirname,
       `../data/invoices/invoice_${invoiceData.invoiceId}.pdf`
     );
-
     // Generate PDF from HTML using html-pdf
     pdf
       .create(htmlContent, { format: "A4" })
@@ -56,7 +53,6 @@ async function generateInvoice(invoiceData) {
           console.error("Error generating PDF:", err);
           return;
         }
-
         console.log("PDF generated successfully:", res.filename);
         // Send the invoice email
         await sendInvoiceEmail(invoiceData.customerEmail, pdfPath);
@@ -65,7 +61,6 @@ async function generateInvoice(invoiceData) {
     console.error("Error generating invoice:", error);
   }
 }
-
 async function sendInvoiceEmail(email, pdfPath) {
   transporter = nodemailer.createTransport({
     host: EMAIL_HOST,

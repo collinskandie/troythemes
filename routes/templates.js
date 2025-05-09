@@ -5,11 +5,7 @@ const unzipper = require("unzipper");
 const fs = require("fs");
 const path = require("path");
 const { Template, Transaction, Order } = require("../models");
-const { title } = require("process");
-// const { Transaction } = require("sequelize");
-
 const upload = multer({ dest: "temp_zips/" });
-
 // Upload Form (Optional UI)
 router.get("/upload", (req, res) => {
   res.render("upload-theme", { title: "Upload Theme" });
