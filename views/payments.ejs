@@ -97,7 +97,7 @@
           <div class="container py-5">
             <div class="row justify-content-center">
               <h2 class="mb-4 text-center">Payments List</h2>
-              <% if (payments && payment.length > 0) { %>
+              <% if (payments && payments.length > 0) { %>
               <div class="table-responsive">
                 <table class="table table-striped table-bordered align-middle">
                   <thead class="table-light">
@@ -159,83 +159,6 @@
           </div>
         </div>
       </div>
-      <!-- Edit Modal -->
-      <div
-        class="modal fade"
-        id="editModal"
-        tabindex="-1"
-        aria-labelledby="editModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <form id="editTemplateForm" method="POST">
-              <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Template</h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <input type="hidden" name="id" id="edit-id" />
-                <div class="mb-3">
-                  <label for="edit-name" class="form-label">Name</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="name"
-                    id="edit-name"
-                    required
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="edit-description" class="form-label"
-                    >Description</label
-                  >
-                  <textarea
-                    class="form-control"
-                    name="description"
-                    id="edit-description"
-                    rows="3"
-                  ></textarea>
-                </div>
-                <div class="mb-3">
-                  <label for="edit-category" class="form-label">Category</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="category"
-                    id="edit-category"
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="edit-cost" class="form-label">Cost (KES)</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    name="cost"
-                    id="edit-cost"
-                  />
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="submit" class="btn btn-primary">
-                  Save Changes
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
   </body>
 
@@ -244,38 +167,4 @@
   <script src="/lib/wow/wow.min.js"></script>
   <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
   <script src="/js/main.js"></script>
-  <script>
-    function populateEditFormFromElement(el) {
-      const template = JSON.parse(el.getAttribute("data-template"));
-      populateEditForm(template);
-      console.log("template to be populated", template);
-    }
-
-    function populateEditForm(template) {
-      document.getElementById("edit-id").value = template._id;
-      document.getElementById("edit-name").value = template.name;
-      document.getElementById("edit-description").value = template.description;
-      document.getElementById("edit-category").value = template.category;
-      document.getElementById("edit-cost").value = template.cost;
-      document.getElementById(
-        "editTemplateForm"
-      ).action = `/templates/edit/${template.id}`;
-    }
-  </script>
-  <script>
-    function filterTemplates() {
-      const input = document.getElementById("searchInput").value.toLowerCase();
-      const rows = document.querySelectorAll("tbody tr");
-
-      rows.forEach((row) => {
-        const name = row.getAttribute("data-name");
-        const category = row.getAttribute("data-category");
-        if (name.includes(input) || category.includes(input)) {
-          row.style.display = "";
-        } else {
-          row.style.display = "none";
-        }
-      });
-    }
-  </script>
 </html>

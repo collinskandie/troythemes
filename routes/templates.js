@@ -4,7 +4,7 @@ const multer = require("multer");
 const unzipper = require("unzipper");
 const fs = require("fs");
 const path = require("path");
-const { Template, Transaction } = require("../models");
+const { Template, Transaction, Order } = require("../models");
 const { title } = require("process");
 // const { Transaction } = require("sequelize");
 
@@ -31,7 +31,7 @@ router.get("/list", async (req, res) => {
 });
 router.get("/orders", async (req, res) => {
   try {
-    const orders = await Template.findAll();
+    const orders = await Order.findAll();
 
     res.render("orders", {
       title: "Orders",
@@ -181,6 +181,24 @@ router.post("/edit/:id", async (req, res) => {
     res.redirect("/templates/list");
   } catch (error) {
     res.status(500).send("Error updating template.");
+  }
+});
+router.post("/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Find the template by ID
+    const template = await Template.findByPk(id);
+    if (!template) {
+      return res.status(404).send("Template not found");
+    }
+
+    // Delete the template from the database
+    await Template.destroy({ where: { id } });
+
+    res.redirect("/templates/list");
+  } catch (error) {
+    res.status(500).send("Error deleting template.");
   }
 });
 // Preview Route

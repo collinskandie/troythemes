@@ -26,6 +26,9 @@ transporter = nodemailer.createTransport({
     pass: EMAIL_PASS,
   },
 });
+// router.get("/login", (req, res) => {
+//   res.render("login", { title: "Login" });
+// });
 
 /* GET home page. */
 router.get("/", async (req, res) => {
@@ -104,6 +107,9 @@ router.get("/preview/:id", async (req, res) => {
   if (!template) return res.status(404).send("Template not found");
 
   res.render("preview", { template: template });
+});
+router.get("/login", async (req, res) => {
+  res.render("login", { template: null });
 });
 
 router.get("/checkout", async (req, res) => {
