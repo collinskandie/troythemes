@@ -4,8 +4,9 @@ const multer = require("multer");
 const unzipper = require("unzipper");
 const fs = require("fs");
 const path = require("path");
-const { Template } = require("../models");
+const { Template, Transaction } = require("../models");
 const { title } = require("process");
+// const { Transaction } = require("sequelize");
 
 const upload = multer({ dest: "temp_zips/" });
 
@@ -13,7 +14,52 @@ const upload = multer({ dest: "temp_zips/" });
 router.get("/upload", (req, res) => {
   res.render("upload-theme", { title: "Upload Theme" });
 });
+router.get("/list", async (req, res) => {
+  // Fetch all templates from the database
+  try {
+    const templates = await Template.findAll();
+    res.render("template-list", {
+      title: "Template List",
+      templates: templates,
+      message: null, // or any message you want to display
+    });
+    console.log(templates);
+  } catch (error) {
+    console.error("Error fetching templates: ", error);
+    res.status(500).send("Error fetching templates.");
+  }
+});
+router.get("/orders", async (req, res) => {
+  try {
+    const orders = await Template.findAll();
 
+    res.render("orders", {
+      title: "Orders",
+      orders: orders,
+      message: null, // or any message you want to display
+    });
+    console.log(orders);
+  } catch (error) {
+    console.error("Error fetching orders: ", error);
+    res.status(500).send("Error fetching orders.");
+  }
+});
+router.get("/payments", async (req, res) => {
+  try {
+    const payments = await Transaction.findAll();
+    console.log(payments);
+
+    res.render("payments", {
+      title: "Payments",
+      payments: payments,
+      message: null, // or any message you want to display
+    });
+    console.log(payments);
+  } catch (error) {
+    console.error("Error fetching orders: ", error);
+    res.status(500).send("Error fetching orders.");
+  }
+});
 router.post(
   "/themes/upload",
   upload.fields([
@@ -116,7 +162,27 @@ router.post(
     }
   }
 );
+router.post("/edit/:id", async (req, res) => {
+  try {
+    const { name, description, category, cost } = req.body;
+    const { id } = req.params;
 
+    const template = await Template.findByPk(id);
+    if (!template) {
+      return res.status(404).send("Template not found");
+    }
+
+    // Update the template in the database
+    await Template.update(
+      { name, description, category, cost },
+      { where: { id } }
+    );
+
+    res.redirect("/templates/list");
+  } catch (error) {
+    res.status(500).send("Error updating template.");
+  }
+});
 // Preview Route
 router.get("/preview/:slug", async (req, res) => {
   const { slug } = req.params;
