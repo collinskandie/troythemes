@@ -42,8 +42,8 @@ app.use(cors());
 // Set EJS as the view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(expressLayouts);
-app.set("layout", "layout");
+// app.use(expressLayouts);
+// app.set("layout", "layout");
 
 // app.use("/preview-files", express.static(path.join(__dirname, "uploads")));
 app.use("/", indexRouter);

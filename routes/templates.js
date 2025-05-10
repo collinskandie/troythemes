@@ -178,7 +178,7 @@ router.post("/edit/:id", async (req, res) => {
       { where: { id } }
     );
 
-    res.redirect("/admin/templates/list");
+    res.redirect("/templates/admin/list");
   } catch (error) {
     res.status(500).send("Error updating template.");
   }
@@ -196,7 +196,7 @@ router.post("/delete/:id", async (req, res) => {
     // Delete the template from the database
     await Template.destroy({ where: { id } });
 
-    res.redirect("/admin/templates/list");
+    res.redirect("/templates/admin/list");
   } catch (error) {
     res.status(500).send("Error deleting template.");
   }
