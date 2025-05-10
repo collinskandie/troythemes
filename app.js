@@ -10,7 +10,7 @@ var usersRouter = require("./routes/authRoutes");
 var cartRouter = require("./routes/cart");
 const templateRoutes = require("./routes/templates");
 const expressLayouts = require("express-ejs-layouts");
-const session = require("express-session");
+// const session = require("express-session");
 
 var cors = require("cors");
 var app = express();
@@ -32,14 +32,14 @@ sequelize
   .catch((err) => {
     console.error("❌ DB Connection Error: ", err);
   });
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || "secretkey",
-    resave: false,
-    saveUninitialized: false,
-    cookie: { secure: process.env.SECURE }, // set secure: true if using HTTPS
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.SESSION_SECRET || "secretkey",
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { secure: process.env.SECURE }, // set secure: true if using HTTPS
+//   })
+// );
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
