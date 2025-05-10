@@ -16,7 +16,7 @@ var cors = require("cors");
 var app = express();
 const { Sequelize } = require("sequelize");
 // view engine setup
-
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const { sequelize } = require("./models");
@@ -37,34 +37,24 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-app.use("/templates", templateRoutes);
-
-// app.use("/preview-files", express.static(path.join(__dirname, "uploads")));
-app.use("/", indexRouter);
-app.use("/cart", cartRouter);
-app.use("/users", usersRouter);
-
 app.use(cors());
 
 // Set EJS as the view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(expressLayouts);
-app.set("layout", "layout"); // layout.ejs will be the layout
-// Serve static files
-app.use(express.static("public"));
+app.set("layout", "layout");
+
+// app.use("/preview-files", express.static(path.join(__dirname, "uploads")));
+app.use("/", indexRouter);
+app.use("/cart", cartRouter);
+app.use("/users", usersRouter);
+app.use("/templates", templateRoutes);
 
 // catch 404 and forward to error handler
 app.use((req, res) => {
   res.status(404).render("404", { message: "Page not found" });
 });
-
-const port = process.env.PORT || 5000;
-
-// app.listen(port, () => {
-//   console.log(`Server is running on port ${port}`);
-// });
 
 // error handler
 app.use(function (err, req, res, next) {
@@ -72,7 +62,6 @@ app.use(function (err, req, res, next) {
   console.log("Locals: ", res.locals);
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
-
   // render the error page
   res.status(err.status || 500);
   console.log(`${req.method} ${req.url} - ${err.message}`);
