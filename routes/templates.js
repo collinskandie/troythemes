@@ -7,6 +7,10 @@ const path = require("path");
 const { Template, Transaction, Order } = require("../models");
 const upload = multer({ dest: "temp_zips/" });
 // Upload Form (Optional UI)
+
+router.get("/test", (req, res) => {
+  res.send("Templates test route working.");
+});
 router.get("/upload", (req, res) => {
   res.render("upload-theme", { title: "Upload Theme" });
 });
