@@ -32,14 +32,7 @@ sequelize
   .catch((err) => {
     console.error("❌ DB Connection Error: ", err);
   });
-// app.use(
-//   session({
-//     secret: process.env.SESSION_SECRET || "secretkey",
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: { secure: process.env.SECURE }, // set secure: true if using HTTPS
-//   })
-// );
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

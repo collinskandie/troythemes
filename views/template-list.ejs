@@ -52,6 +52,25 @@
 
     <!-- Template Stylesheet -->
     <link href="/css/style.css" rel="stylesheet" />
+    <style>      
+        .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .pagination button {
+      padding: 5px 15px;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+
+    .pagination button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+</style>
+
   </head>
   <body>
     <div class="container-fluid p-0">
@@ -204,6 +223,11 @@
                     <% }) %>
                   </tbody>
                 </table>
+                <div class="pagination">
+                  <button id="prevPage" onclick="changePage(-1)">Previous</button>
+                  <span id="pageNumber">Page 1</span>
+                  <button id="nextPage" onclick="changePage(1)">Next</button>
+                </div>
               </div>
               <% } else { %>
                 <thead class="table-light">
@@ -377,6 +401,58 @@
       });
     }
   </script>
+  <script>
+  // Variables to track the current page and the number of rows per page
+  let currentPage = 1;
+  const rowsPerPage = 10;
+
+  function displayTablePage() {
+    const rows = document.querySelectorAll("tbody tr");
+    const totalRows = rows.length;
+    const totalPages = Math.ceil(totalRows / rowsPerPage);
+
+    // Calculate the start and end indices of the rows for the current page
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+
+    // Hide all rows
+    rows.forEach((row, index) => {
+      row.style.display = "none";  // Hide the row initially
+    });
+
+    // Show only the rows for the current page
+    for (let i = start; i < end; i++) {
+      if (rows[i]) rows[i].style.display = "";
+    }
+
+    // Update page number display
+    document.getElementById("pageNumber").innerText = `Page ${currentPage}`;
+
+    // Disable/enable Previous and Next buttons based on the current page
+    document.getElementById("prevPage").disabled = currentPage === 1;
+    document.getElementById("nextPage").disabled = currentPage === totalPages;
+  }
+
+  function changePage(direction) {
+    // Get total number of pages
+    const rows = document.querySelectorAll("tbody tr");
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+    // Update the current page
+    currentPage += direction;
+
+    // Ensure the page number stays within bounds
+    if (currentPage < 1) currentPage = 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    // Re-display the table for the new page
+    displayTablePage();
+  }
+
+  // Call displayTablePage on page load to display the first page
+  window.onload = displayTablePage;
+</script>
+
   </body>
 
     
