@@ -6,7 +6,7 @@ const fs = require("fs");
 const path = require("path");
 const { Template, Transaction, Order } = require("../models");
 const upload = multer({ dest: "temp_zips/" });
-// Upload Form (Optional UI)
+
 
 router.get("/test", (req, res) => {
   res.send("Templates test route working.");
@@ -14,7 +14,7 @@ router.get("/test", (req, res) => {
 router.get("/upload", (req, res) => {
   res.render("upload-theme", { title: "Upload Theme" });
 });
-router.get("/list", async (req, res) => {
+router.get("/admin/list", async (req, res) => {
   // Fetch all templates from the database
   try {
     const templates = await Template.findAll();
@@ -29,7 +29,7 @@ router.get("/list", async (req, res) => {
     res.status(500).send("Error fetching templates.");
   }
 });
-router.get("/orders", async (req, res) => {
+router.get("/admin/orders", async (req, res) => {
   try {
     const orders = await Order.findAll();
 
@@ -44,7 +44,7 @@ router.get("/orders", async (req, res) => {
     res.status(500).send("Error fetching orders.");
   }
 });
-router.get("/payments", async (req, res) => {
+router.get("/admin/payments", async (req, res) => {
   try {
     const payments = await Transaction.findAll();
     console.log(payments);
@@ -178,7 +178,7 @@ router.post("/edit/:id", async (req, res) => {
       { where: { id } }
     );
 
-    res.redirect("/templates/list");
+    res.redirect("/admin/templates/list");
   } catch (error) {
     res.status(500).send("Error updating template.");
   }
@@ -196,7 +196,7 @@ router.post("/delete/:id", async (req, res) => {
     // Delete the template from the database
     await Template.destroy({ where: { id } });
 
-    res.redirect("/templates/list");
+    res.redirect("/admin/templates/list");
   } catch (error) {
     res.status(500).send("Error deleting template.");
   }
