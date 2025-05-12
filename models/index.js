@@ -31,10 +31,7 @@ Object.keys(db).forEach((modelName) => {
     db[modelName].associate(db);
   }
 });
-// Add your associations here AFTER models are loaded
-// if (db.Order && db.Template) {
-//   db.Order.belongsTo(db.Template, { foreignKey: "templateId" });
-// }
+
 db.Order.belongsTo(db.Template, {
   foreignKey: "templateId",
   onDelete: "SET NULL", // or "CASCADE", depending on what you prefer
