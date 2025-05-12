@@ -31,7 +31,6 @@ router.get("/admin/list", async (req, res) => {
 router.get("/admin/orders", async (req, res) => {
   try {
     const orders = await Order.findAll();
-
     res.render("orders", {
       title: "Orders",
       orders: orders,
@@ -40,7 +39,7 @@ router.get("/admin/orders", async (req, res) => {
     console.log(orders);
   } catch (error) {
     console.error("Error fetching orders: ", error);
-    res.status(500).send("Error fetching orders.");
+    res.status(500).send(error);
   }
 });
 router.get("/admin/payments", async (req, res) => {
