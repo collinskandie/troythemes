@@ -32,9 +32,15 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 // Add your associations here AFTER models are loaded
-if (db.Order && db.Template) {
-  db.Order.belongsTo(db.Template, { foreignKey: "templateId" });
-}
+// if (db.Order && db.Template) {
+//   db.Order.belongsTo(db.Template, { foreignKey: "templateId" });
+// }
+db.Order.belongsTo(db.Template, {
+  foreignKey: "templateId",
+  onDelete: "SET NULL", // or "CASCADE", depending on what you prefer
+  hooks: true,
+});
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 module.exports = db;

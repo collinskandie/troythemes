@@ -2,7 +2,12 @@ module.exports = (sequelize, DataTypes) => {
   const Order = sequelize.define("Order", {
     templateId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true, // required if you're using SET NULL
+      references: {
+        model: "Templates",
+        key: "id",
+      },
+      onDelete: "SET NULL", // or "CASCADE"
     },
     hostingId: {
       type: DataTypes.INTEGER,
