@@ -33,7 +33,7 @@ transporter = nodemailer.createTransport({
 /* GET home page. */
 router.get("/", async (req, res) => {
   try {
-    const { name, category, minPrice, maxPrice } = req.query;
+    const { name, category } = req.query;
 
     // Build the filter object dynamically
     const filters = {};
@@ -44,15 +44,10 @@ router.get("/", async (req, res) => {
     if (category) {
       filters.category = category;
     }
-    if (minPrice || maxPrice) {
-      filters.cost = {};
-      if (minPrice) filters.cost[Op.gte] = parseFloat(minPrice);
-      if (maxPrice) filters.cost[Op.lte] = parseFloat(maxPrice);
-    }
 
     const templates = await Template.findAll({ where: filters });
-    // if (!templates.length)
-    //   return res.status(404).send("No templates match the search criteria.");
+    console.log("Templates: ", templates);
+ 
 
     res.render("index", { templates });
   } catch (error) {

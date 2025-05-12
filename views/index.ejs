@@ -32,29 +32,34 @@
             />
           </div>
           <div class="col-md-3">
-            <input
+            <select class="form-control" name="category" class="form-control">
+              <option value="">Select a category</option>
+              <option value="AGENCY">AGENCY</option>
+              <option value="BEAUTY & HAIR">BEAUTY & HAIR</option>
+              <option value="BUSINESS">BUSINESS</option>
+              <option value="CORPORATE">CORPORATE</option>
+              <option value="ECOMMERCE">ECOMMERCE</option>
+              <option value="EDUCATION">EDUCATION</option>
+              <option value="INDUSTRIAL">INDUSTRIAL</option>
+              <option value="MAINTENANCE & SERVICE">
+                MAINTENANCE & SERVICE
+              </option>
+              <option value="MEDICAL & HOSPITAL">MEDICAL & HOSPITAL</option>
+              <option value="NEWS & MAGAZINE">NEWS & MAGAZINE</option>
+              <option value="NONPROFIT">NONPROFIT</option>
+              <option value="PERSONAL">PERSONAL</option>
+              <option value="RESTAURANT & FOOD">RESTAURANT & FOOD</option>
+              <option value="TRAVEL & TOURISM">TRAVEL & TOURISM</option>
+              <option value="WEDDING">WEDDING</option>
+            </select>
+            <!-- <input
               type="text"
               name="category"
               class="form-control"
               placeholder="Search by category"
-            />
+            /> -->
           </div>
-          <div class="col-md-2">
-            <input
-              type="number"
-              name="minPrice"
-              class="form-control"
-              placeholder="Min price"
-            />
-          </div>
-          <div class="col-md-2">
-            <input
-              type="number"
-              name="maxPrice"
-              class="form-control"
-              placeholder="Max price"
-            />
-          </div>
+
           <div class="col-md-2">
             <button type="submit" class="btn btn-primary w-100">Search</button>
           </div>
@@ -77,7 +82,8 @@
 </div>
 <!-- Inject template data -->
 <script>
-  const templates = JSON.parse('<%- JSON.stringify(templates) %>');
+  const templates = <%- JSON.stringify(templates).replace(/</g, '\\u003c') %>;
+  console.log(templates);
 </script>
 
 <script>
