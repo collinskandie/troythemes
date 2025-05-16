@@ -19,7 +19,7 @@ router.get("/admin/list", async (req, res) => {
     const templates = await Template.findAll();
     res.render("template-list", {
       title: "Template List",
-      templates: templates,
+      templates: templates, 
       message: null, // or any message you want to display
     });
     console.log(templates);
@@ -162,7 +162,7 @@ router.post(
 );
 router.post("/edit/:id", async (req, res) => {
   try {
-    const { name, description, category, cost } = req.body;
+    const { name, description,  category, cost } = req.body;
     const { id } = req.params;
 
     const template = await Template.findByPk(id);

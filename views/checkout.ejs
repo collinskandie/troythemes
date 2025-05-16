@@ -96,7 +96,6 @@
       </div>
     </div>
   </div>
-
   ` }) %>
   <script>
     document.addEventListener("DOMContentLoaded", async () => {
@@ -109,7 +108,7 @@
         localStorage.getItem("selectedHostingPlan") || "{}"
       );
       const hostingName = hostingData.name || null;
-      const hostingPrice = parseFloat((hostingData.price || "0").replace(/,/g, ""));
+      const hostingPrice = parseFloat((hostingData.price));
 
       console.log("Hosting price:", hostingPrice);
       console.log("Template price:", templatePrice);
@@ -121,7 +120,6 @@
       try {
         const res = await fetch(`/api/template/${templateId}`);
         <!-- console.log(res.body); -->
-
         const template = await res.json();
         console.log(template);
         console.log(template.template);
@@ -135,7 +133,6 @@
         <p>Category: ${tDetails.category}</p>
         <p><strong>Cost:</strong> KES ${tDetails.cost}</p>
       `;
-
         if (hostingName) {
           document.getElementById("hostingDetails").innerHTML = `
           <h5>Hosting: ${hostingName}</h5>

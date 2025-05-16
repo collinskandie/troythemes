@@ -1,207 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      TroyThemes | <%= typeof title !== 'undefined' ? title : 'Default Title' %>
-    </title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8">
+  <title>Co-operative Education and Training Activities 2025</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
 
-    <!-- Icon Fonts -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
+  <h4>CO-OPERATIVE EDUCATION AND TRAINING ACTIVITIES | 2025</h4>
+  <h2 class="mt-3">NATIONAL TRAINING PROGRAMMES</h2>
 
-    <!-- TroyThemes Libraries -->
-    <link href="/lib/animate/animate.min.css" rel="stylesheet" />
-    <link
-      href="/lib/owlcarousel/assets/owl.carousel.min.css"
-      rel="stylesheet"
-    />
+  <div class="table-responsive mt-4">
+    <table class="table table-bordered table-striped align-middle">
+      <table style="width:100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid #ddd; padding: 10px; background-color: #343a40; color: white;">Date</th>
+      <th style="border: 1px solid #ddd; padding: 10px; background-color: #343a40; color: white;">Course Title</th>
+      <th style="border: 1px solid #ddd; padding: 10px; background-color: #343a40; color: white;">Target</th>
+      <th style="border: 1px solid #ddd; padding: 10px; background-color: #343a40; color: white;">Venue</th>
+      <th style="border: 1px solid #ddd; padding: 10px; background-color: #343a40; color: white;">Reporting Date</th>
+      <th style="border: 1px solid #ddd; padding: 10px; background-color: #343a40; color: white;">Departure Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="6" style="background-color: #e9ecef; font-weight: bold; text-align: center;">MARCH</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 10px;">17th–21st March</td>
+      <td style="border: 1px solid #ddd; padding: 10px;">IT Security and Cybercrime Prevention strategies</td>
+      <td style="border: 1px solid #ddd; padding: 10px;">IT Security Professionals, Network Administrators, System Administrators, ICT Managers and Directors</td>
+      <td style="border: 1px solid #ddd; padding: 10px;">Pride Inn Flamingo Beach Resort</td>
+      <td style="border: 1px solid #ddd; padding: 10px;">16th March at 4.00 pm onwards</td>
+      <td style="border: 1px solid #ddd; padding: 10px;">21st March at 2.00 pm</td>
+    </tr>
+    <!-- More rows here -->
+  </tbody>
+</table>
 
-    <!-- TroyThemes Bootstrap Theme -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+  </div>
 
-    <!-- TroyThemes Main Styles -->
-    <link href="/css/style.css" rel="stylesheet" />
-  </head>
-  <body>
-    <div class="container-fluid p-0">
-      <div
-        id="spinner"
-        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
-      >
-        <div
-          class="spinner-border text-primary"
-          style="width: 3rem; height: 3rem"
-          role="status"
-        >
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
-      <!-- Topbar -->
-      <nav
-        class="navbar navbar-expand-lg navbar-light bg-secondary px-4 py-2 text-white"
-      >
-        <a class="navbar-brand text-white fw-bold" href="#">
-          <i class="fa fa-server me-2"></i>TroyThemes Panel
-        </a>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#">Profile</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <div class="row g-0">
-        <!-- Sidebar -->
-        <div class="col-md-2 bg-dark vh-100 text-white p-3">
-          <h5 class="text-white">Menu</h5>
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#"
-                ><i class="fa fa-home me-2"></i>Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#templates">📄 Templates</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="#orders"
-                >💳 Orders & Payments</a
-              >
-            </li>
-          </ul>
-        </div>
-        <!-- Main Content -->
-        <div class="col-md-10 p-4">
-          <div class="container py-5">
-            <div class="row justify-content-center">
-              <div class="col-lg-8">
-                <!-- Alert Message -->
-                <% if (typeof message !== 'undefined' && message) { %>
-                <div
-                  class="alert alert-success alert-dismissible fade show"
-                  role="alert"
-                >
-                  <%= message %>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <% } %>
-                <h2 class="mb-4 text-center">Upload New Theme</h2>
-                <form
-                  action="/templates/themes/upload"
-                  method="POST"
-                  enctype="multipart/form-data"
-                  class="bg-light p-4 rounded shadow-sm"
-                >
-                  <div class="mb-3">
-                    <label for="name" class="form-label">Template Name</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="name"
-                      name="name"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="description" class="form-label"
-                      >Template Description</label
-                    >
-                    <textarea
-                      class="form-control"
-                      id="description"
-                      name="description"
-                      rows="4"
-                      required
-                    ></textarea>
-                  </div>
-                  <div class="mb-3">
-                    <label for="category" class="form-label"
-                      >Category / Tags</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="category"
-                      name="category"
-                      placeholder="e.g., business, portfolio"
-                    />
-                    <label for="cost" class="form-label">Template Cost</label>
-                    <input
-                      type="number"
-                      class="form-control"
-                      id="cost"
-                      name="cost"
-                      placeholder="e.g., 1000"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="thumbnail" class="form-label"
-                      >Thumbnail Image</label
-                    >
-                    <input
-                      type="file"
-                      class="form-control"
-                      id="thumbnail"
-                      name="thumbnail"
-                      accept="image/*"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label for="file" class="form-label"
-                      >Template File (ZIP)</label
-                    >
-                    <input
-                      type="file"
-                      class="form-control"
-                      id="file"
-                      name="file"
-                      accept=".zip,.rar"
-                      required
-                    />
-                  </div>
-                  <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary">
-                      Upload Theme
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="/lib/wow/wow.min.js"></script>
-  <script src="/lib/owlcarousel/owl.carousel.min.js"></script>
-  <script src="/js/main.js"></script>
+</body>
 </html>

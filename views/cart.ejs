@@ -169,9 +169,7 @@
       localStorage.setItem("selectedTemplate", selectedTemplateId);
       localStorage.setItem("templateName", selectedTemplateName);
       localStorage.setItem("templatePrice", selectedTemplatePrice);
-      localStorage.setItem("selectedHostingPlan", JSON.stringify(hostingPlan));
-     
-
+      localStorage.setItem("selectedHostingPlan", JSON.stringify(hostingPlan));    
       window.location.href = `/checkout?templateId=${selectedTemplateId}&hostingId=${hostingPlan.id}`;
     }
   </script>

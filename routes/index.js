@@ -47,7 +47,6 @@ router.get("/", async (req, res) => {
 
     const templates = await Template.findAll({ where: filters });
     console.log("Templates: ", templates);
- 
 
     res.render("index", { templates });
   } catch (error) {
@@ -163,7 +162,7 @@ router.post("/complete-purchase", async (req, res) => {
 
     if (selectedPlanRaw) {
       selectedPlan = JSON.parse(selectedPlanRaw);
-      planPrice = parseFloat((selectedPlan.price || "0").replace(/,/g, ""));
+      planPrice = parseFloat(selectedPlan.price);
       items.push({
         description: selectedPlan.name,
         amount: planPrice,

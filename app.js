@@ -4,13 +4,26 @@ var express = require("express");
 var path = require("path");
 require("dotenv").config();
 var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+// var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/authRoutes");
 var cartRouter = require("./routes/cart");
 const templateRoutes = require("./routes/templates");
-const expressLayouts = require("express-ejs-layouts");
-// const session = require("express-session");
+const winston = require("winston");
+
+const logger = winston.createLogger({
+  level: "info", // Levels: error, warn, info, verbose, debug, silly
+  format: winston.format.combine(
+    winston.format.timestamp(),
+    winston.format.printf(({ timestamp, level, message }) => {
+      return `${timestamp} [${level.toUpperCase()}]: ${message}`;
+    })
+  ),
+  transports: [
+    new winston.transports.File({ filename: "logs/app.log" }), // Log to a file
+    new winston.transports.Console(), // Log to console
+  ],
+});
 
 var cors = require("cors");
 var app = express();
@@ -33,7 +46,7 @@ sequelize
     console.error("❌ DB Connection Error: ", err);
   });
 
-app.use(logger("dev"));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -42,10 +55,7 @@ app.use(cors());
 // Set EJS as the view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-// app.use(expressLayouts);
-// app.set("layout", "layout");
 
-// app.use("/preview-files", express.static(path.join(__dirname, "uploads")));
 app.use("/", indexRouter);
 app.use("/cart", cartRouter);
 app.use("/users", usersRouter);
